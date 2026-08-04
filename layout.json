@@ -1,0 +1,44 @@
+[
+  {
+    "id": "hyper-jump",
+    "title": "Hyper Jump",
+    "thumbnail": "thumbs/hyper-jump.png",
+    "src": "games/hyper-jump.html",
+    "category": "Action"
+  },
+  {
+    "id": "block-puzzle",
+    "title": "Block Puzzle",
+    "thumbnail": "thumbs/block-puzzle.png",
+    "src": "games/block-puzzle.html",
+    "category": "Puzzle"
+  },
+  {
+    "id": "space-invader-clone",
+    "title": "Space Invasion",
+    "thumbnail": "thumbs/space-invasion.png",
+    "src": "games/space-invasion.html",
+    "category": "Classic"
+  },
+  {
+    "id": "maze-runner",
+    "title": "Maze Runner",
+    "thumbnail": "thumbs/maze-runner.png",
+    "src": "games/maze-runner.html",
+    "category": "Adventure"
+  },
+  {
+    "id": "slide-3",
+    "title": "Slide 3",
+    "thumbnail": "thumbs/slide-3.png",
+    "src": "games/slide-3.html",
+    "category": "Puzzle"
+  },
+  {
+    "id": "racer-mini",
+    "title": "Racer Mini",
+    "thumbnail": "thumbs/racer-mini.png",
+    "src": "games/racer-mini.html",
+    "category": "Racing"
+  }
+]
