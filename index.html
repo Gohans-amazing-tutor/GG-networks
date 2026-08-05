@@ -44,90 +44,51 @@
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
 
-    /* left area (can be used for hamburger later) */
     .header-left{display:flex;align-items:center;gap:12px;}
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .logo-placeholder{
-      width:40px;height:40px;border-radius:6px;background:linear-gradient(#111,#000);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--fg);font-size:14px;
-    }
-    .site-name{font-weight:700;letter-spacing:0.6px;font-size:18px;color:var(--fg);}
-    .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px;}
-    .search{
-      width:min(720px,70%);
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:var(--glass);
-      border-radius:10px;
-      padding:8px 12px;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:var(--shadow);
-    }
-    .search input{
-      flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px;
-    }
-    .header-right{display:flex;align-items:center;gap:12px;}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo-placeholder{width:40px;height:40px;border-radius:6px;background:linear-gradient(#111,#000);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--fg);font-size:14px}
+    .site-name{font-weight:700;letter-spacing:0.6px;font-size:18px;color:var(--fg);}    
+    .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px}
+    .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
+    .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
+    .header-right{display:flex;align-items:center;gap:12px}
 
-    main{padding:22px 26px 120px 26px;}
+    main{padding:22px 26px 120px 26px}
 
     /* Row (category) */
-    .row{margin-bottom:28px;}
-    .row-title{font-size:18px;margin:6px 0 12px 4px;color:var(--muted);font-weight:600;}
-    .row-cards{display:flex;gap:12px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth;}
-    .card{
-      min-width:220px;height:125px;background:linear-gradient(#0b0b0b,#070707);border-radius:8px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);
-      cursor:pointer;flex:0 0 auto;
-    }
-    .card:hover{transform:translateY(-6px);transition:transform .16s ease;}
-    .card-thumb{
-      background:#000;border-radius:6px;height:70px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02);
-    }
-    .card-title{font-size:14px;margin-top:8px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .card-meta{font-size:12px;color:var(--muted);}
+    .row{margin-bottom:28px}
+    .row-title{font-size:18px;margin:6px 0 12px 4px;color:var(--muted);font-weight:600}
+    .row-cards{display:flex;gap:12px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
+    .card{min-width:220px;height:125px;background:linear-gradient(#0b0b0b,#070707);border-radius:8px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);cursor:pointer;flex:0 0 auto}
+    .card:hover{transform:translateY(-6px);transition:transform .16s ease}
+    .card-thumb{background:#000;border-radius:6px;height:70px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02)}
+    .card-title{font-size:14px;margin-top:8px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .card-meta{font-size:12px;color:var(--muted)}
 
     /* player modal */
-    .modal{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:60;padding:30px;
-    }
-    .modal.open{display:flex;}
-    .player{
-      width:min(1100px,96%);height:min(700px,84%);background:#000;border-radius:10px;border:1px solid rgba(255,255,255,0.05);overflow:hidden;position:relative;display:flex;flex-direction:column;
-    }
-    .player iframe{flex:1;border:0;background:#000;}
-    .player .player-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:60;padding:30px}
+    .modal.open{display:flex}
+    .player{width:min(1100px,96%);height:min(700px,84%);background:#000;border-radius:10px;border:1px solid rgba(255,255,255,0.05);overflow:hidden;position:relative;display:flex;flex-direction:column}
+    .player iframe{flex:1;border:0;background:#000}
+    .player .player-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
     .close-btn{background:transparent;border:0;color:var(--fg);font-size:16px;cursor:pointer}
 
     /* chat drawer */
     .chat-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--fg);padding:8px 12px;border-radius:8px;cursor:pointer}
-    .chat-drawer{
-      position:fixed;right:16px;top:16px;height:calc(100vh - 32px);width:var(--chat-width);max-width:420px;background:linear-gradient(#050505,#0b0b0b);border:1px solid rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;z-index:70;box-shadow:0 15px 50px rgba(0,0,0,0.7);
-      transform:translateX(30px);opacity:0;transition:all .18s ease;
-    }
-    .chat-drawer.open{transform:translateX(0);opacity:1;}
-    .chat-header{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;}
-    .username-row{display:flex;gap:8px;align-items:center;}
+    .chat-drawer{position:fixed;right:16px;top:16px;height:calc(100vh - 32px);width:var(--chat-width);max-width:420px;background:linear-gradient(#050505,#0b0b0b);border:1px solid rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;z-index:70;box-shadow:0 15px 50px rgba(0,0,0,0.7);transform:translateX(30px);opacity:0;transition:all .18s ease}
+    .chat-drawer.open{transform:translateX(0);opacity:1}
+    .chat-header{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px}
+    .username-row{display:flex;gap:8px;align-items:center}
     .username-row input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--fg);outline:none}
-    .chat-body{flex:1;padding:12px;overflow:auto;display:flex;flex-direction:column;gap:8px;}
-    .msg{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px;color:var(--fg);max-width:90%;word-wrap:break-word;}
-    .msg.me{background:rgba(255,255,255,0.04);align-self:flex-end;}
-    .chat-footer{padding:10px;border-top:1px solid rgba(255,255,255,0.03);display:flex;gap:8px;}
+    .chat-body{flex:1;padding:12px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+    .msg{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px;color:var(--fg);max-width:90%;word-wrap:break-word}
+    .msg.me{background:rgba(255,255,255,0.04);align-self:flex-end}
+    .chat-footer{padding:10px;border-top:1px solid rgba(255,255,255,0.03);display:flex;gap:8px}
     .chat-footer input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--fg);outline:none}
     .chat-footer button{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#000;cursor:pointer;font-weight:700}
 
-    /* small screens adjustments */
-    @media (max-width:720px){
-      .search{width:92%}
-      .logo-placeholder{width:34px;height:34px}
-      .card{min-width:160px;height:110px}
-      .player{width:96%;height:60%}
-      .chat-drawer{width:100%;height:40vh;right:0;left:0;bottom:0;top:auto;border-radius:10px 10px 0 0;max-width:100%}
-    }
+    @media (max-width:720px){.search{width:92%}.logo-placeholder{width:34px;height:34px}.card{min-width:160px;height:110px}.player{width:96%;height:60%}.chat-drawer{width:100%;height:40vh;right:0;left:0;bottom:0;top:auto;border-radius:10px 10px 0 0;max-width:100%}}
 
-    /* simple scrollbar style */
     ::-webkit-scrollbar{height:10px;width:10px}
     ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.04);border-radius:100px}
   </style>
@@ -218,13 +179,11 @@
         const res = await fetch('layout.json', {cache:'no-store'});
         if(!res.ok) throw new Error('layout.json not found');
         layout = await res.json();
+        if(!Array.isArray(layout)) layout = [];
       }catch(e){
-        // fallback minimal sample if layout.json cannot be fetched
-        layout = [
-          {"id":"sample-1","title":"Sample Game 1","thumbnail":"thumbs/sample1.png","src":"games/sample-1.html","category":"Action"},
-          {"id":"sample-2","title":"Sample Puzzle","thumbnail":"thumbs/sample2.png","src":"games/sample-2.html","category":"Puzzle"},
-          {"id":"sample-3","title":"Classic Arcade","thumbnail":"thumbs/sample3.png","src":"games/sample-3.html","category":"Classic"}
-        ];
+        // Do not auto-populate fallback games. Show empty layout and instruct the user to edit layout.json.
+        console.warn('Could not load layout.json or it is invalid. Leave layout empty so you can connect your files via layout.json.');
+        layout = [];
       }
       buildRows();
     }
@@ -244,7 +203,7 @@
       el.tabIndex = 0;
       el.setAttribute('role','button');
       el.innerHTML = `
-        <div class="card-thumb" style="background-image:url('${escapeHtml(game.thumbnail || '')}')" aria-hidden="true"></div>
+        <div class="card-thumb" style="background-image:url('${escapeHtml(game.thumbnail || '')}');" aria-hidden="true"></div>
         <div>
           <div class="card-title">${escapeHtml(game.title)}</div>
           <div class="card-meta">${escapeHtml(game.category || '')}</div>
@@ -259,16 +218,22 @@
       groupByCategory();
       rowsContainer.innerHTML = '';
       const q = (filter||'').trim().toLowerCase();
-      const cats = Object.keys(grouped);
-      // Show categories in original order (as in layout) by mapping
+
+      if(layout.length === 0){
+        // Show helpful empty state so you know to populate layout.json
+        const empty = document.createElement('div');
+        empty.style.padding = '28px';
+        empty.style.textAlign = 'center';
+        empty.innerHTML = `<h2 style="margin:0 0 8px 0;color:var(--muted)">No games found</h2><p style="margin:0;color:var(--muted)">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>`;
+        rowsContainer.appendChild(empty);
+        return;
+      }
+
+      // Preserve category order as they appear in layout
       const seen = new Set();
       const orderedCats = [];
-      for(const g of layout){
-        if(!seen.has(g.category)){
-          orderedCats.push(g.category || 'Other');
-          seen.add(g.category);
-        }
-      }
+      for(const g of layout){ if(!seen.has(g.category)){ orderedCats.push(g.category || 'Other'); seen.add(g.category); } }
+
       for(const cat of orderedCats){
         const items = (grouped[cat]||[]).filter(g => !q || g.title.toLowerCase().includes(q) || (g.category||'').toLowerCase().includes(q));
         if(items.length===0) continue;
@@ -276,9 +241,7 @@
         row.className = 'row';
         row.innerHTML = `<div class="row-title">${escapeHtml(cat)}</div><div class="row-cards"></div>`;
         const cards = row.querySelector('.row-cards');
-        for(const item of items){
-          cards.appendChild(buildCard(item));
-        }
+        for(const item of items){ cards.appendChild(buildCard(item)); }
         rowsContainer.appendChild(row);
       }
     }
@@ -286,24 +249,22 @@
     function openPlayer(game){
       currentGame = game;
       playerTitle.textContent = 'Playing — ' + (game.title || '');
-      // load iframe src: prefer src attribute; if src looks like html file path use it, otherwise support inline code
-      if(game.src && game.src.trim().length){
-        // If src is a URL that starts with data:text/html or starts with http(s) or is a relative path, just set iframe.src
-        const src = game.src;
-        // Prevent unsafe usage: we allow relative or absolute http(s) or data URLs
+      // load iframe: prefer src (URL or relative HTML file) or srcdoc/code if provided
+      if(game.src && typeof game.src === 'string' && game.src.trim().length){
+        const src = game.src.trim();
+        // allow http(s), data URLs, or relative html files
         if(src.startsWith('data:') || src.startsWith('http://') || src.startsWith('https://') || src.endsWith('.html') || src.endsWith('.htm')){
           playerFrame.src = src;
-          // If relative path, set as is; browser will resolve relative to index.html
         }else{
-          // Treat as raw HTML code
+          // treat as raw HTML
           playerFrame.srcdoc = src;
         }
-      }else if(game.code){
-        // older field name "code" might contain HTML string
+      }else if(game.code && typeof game.code === 'string'){
         playerFrame.srcdoc = game.code;
       }else{
         playerFrame.srcdoc = `<html><body style="background:black;color:white;display:flex;align-items:center;justify-content:center;height:100%;"><div style="text-align:center;padding:20px;"><h2>No game file specified</h2><p>${escapeHtml(game.title||'')}</p></div></body></html>`;
       }
+
       playerModal.classList.add('open');
       playerModal.setAttribute('aria-hidden','false');
     }
@@ -317,17 +278,13 @@
       playerFrame.srcdoc = `<html><body style='background:black;color:white;display:flex;align-items:center;justify-content:center;height:100%;'>No game loaded</body></html>`;
       currentGame = null;
     }
+
     openGameNewTab.addEventListener('click', ()=>{
       if(!currentGame) return;
       const src = currentGame.src || '';
       if(!src) return;
-      // Open the game's src in a new tab
       if(src.startsWith('http://') || src.startsWith('https://')) window.open(src,'_blank');
-      else {
-        // try resolve relative path
-        const url = new URL(src, location.href).href;
-        window.open(url,'_blank');
-      }
+      else { const url = new URL(src, location.href).href; window.open(url,'_blank'); }
     });
 
     // Search behavior
@@ -340,108 +297,28 @@
     let username = localStorage.getItem('gg_username') || ('Guest' + Math.floor(Math.random()*9000));
     usernameInput.value = username;
 
-    try{
-      bc = new BroadcastChannel(CHANNEL);
-      bc.onmessage = (ev)=>{
-        if(ev && ev.data) receiveIncomingMessage(ev.data);
-      };
-    }catch(e){
-      // BroadcastChannel may not be supported; we'll use storage events fallback
-      window.addEventListener('storage', (ev)=>{
-        if(ev.key === 'gg-chat-message' && ev.newValue){
-          try{ const data = JSON.parse(ev.newValue); receiveIncomingMessage(data); }catch(e){}
-        }
-      });
-    }
+    try{ bc = new BroadcastChannel(CHANNEL); bc.onmessage = (ev)=>{ if(ev && ev.data) receiveIncomingMessage(ev.data); }; }
+    catch(e){ window.addEventListener('storage', (ev)=>{ if(ev.key === 'gg-chat-message' && ev.newValue){ try{ const data = JSON.parse(ev.newValue); receiveIncomingMessage(data); }catch(e){} } }); }
 
-    function persistMessageToStorage(msg){
-      try{
-        localStorage.setItem('gg-chat-last', JSON.stringify(msg));
-        // Also trigger storage-based broadcast for cross-tab fallback
-        localStorage.setItem('gg-chat-message', JSON.stringify(msg));
-        // keep a history array for basic persistence
-        const history = JSON.parse(localStorage.getItem('gg-chat-history') || '[]');
-        history.push(msg);
-        localStorage.setItem('gg-chat-history', JSON.stringify(history.slice(-200)));
-      }catch(e){}
-    }
+    function persistMessageToStorage(msg){ try{ localStorage.setItem('gg-chat-last', JSON.stringify(msg)); localStorage.setItem('gg-chat-message', JSON.stringify(msg)); const history = JSON.parse(localStorage.getItem('gg-chat-history') || '[]'); history.push(msg); localStorage.setItem('gg-chat-history', JSON.stringify(history.slice(-200))); }catch(e){} }
+    function receiveIncomingMessage(msg){ appendMessageToUI(msg, false); persistMessageToStorage(msg); }
+    function appendMessageToUI(msg, localSend){ const el = document.createElement('div'); el.className = 'msg' + (localSend ? ' me' : ''); el.innerHTML = `<div style="font-weight:700;font-size:12px;margin-bottom:6px;color:var(--muted)">${escapeHtml(msg.name||'')}</div><div>${escapeHtml(msg.text||'')}</div><div style="font-size:11px;margin-top:6px;color:var(--muted)">${new Date(msg.ts).toLocaleTimeString()}</div>`; chatBody.appendChild(el); chatBody.scrollTop = chatBody.scrollHeight; }
+    function sendChatMessage(text){ const msg = {name: username, text: text, ts: Date.now(), id: 'm_'+Math.random().toString(36).slice(2,9)}; appendMessageToUI(msg, true); persistMessageToStorage(msg); if(bc) try{ bc.postMessage(msg); }catch(e){} else localStorage.setItem('gg-chat-message', JSON.stringify(msg)); }
 
-    function receiveIncomingMessage(msg){
-      appendMessageToUI(msg, false);
-      // persist if message from others
-      persistMessageToStorage(msg);
-    }
-
-    function appendMessageToUI(msg, localSend){
-      const el = document.createElement('div');
-      el.className = 'msg' + (localSend ? ' me' : '');
-      el.innerHTML = `<div style="font-weight:700;font-size:12px;margin-bottom:6px;color:var(--muted)">${escapeHtml(msg.name||'')}</div><div>${escapeHtml(msg.text||'')}</div><div style="font-size:11px;margin-top:6px;color:var(--muted)">${new Date(msg.ts).toLocaleTimeString()}</div>`;
-      chatBody.appendChild(el);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    function sendChatMessage(text){
-      const msg = {name: username, text: text, ts: Date.now(), id: 'm_'+Math.random().toString(36).slice(2,9)};
-      // append locally
-      appendMessageToUI(msg, true);
-      // persist
-      persistMessageToStorage(msg);
-      // broadcast
-      if(bc) try{ bc.postMessage(msg); }catch(e){}
-      else localStorage.setItem('gg-chat-message', JSON.stringify(msg)); // triggers storage event
-    }
-
-    saveUsername.addEventListener('click', ()=>{
-      username = (usernameInput.value||'').trim() || username;
-      localStorage.setItem('gg_username', username);
-      usernameInput.value = username;
-      // feedback (tiny)
-      saveUsername.textContent = 'Saved';
-      setTimeout(()=> saveUsername.textContent = 'Save', 1200);
-    });
-
-    sendMessage.addEventListener('click', ()=>{
-      const t = (chatInput.value||'').trim();
-      if(!t) return;
-      sendChatMessage(t);
-      chatInput.value = '';
-    });
+    saveUsername.addEventListener('click', ()=>{ username = (usernameInput.value||'').trim() || username; localStorage.setItem('gg_username', username); usernameInput.value = username; saveUsername.textContent = 'Saved'; setTimeout(()=> saveUsername.textContent = 'Save', 1200); });
+    sendMessage.addEventListener('click', ()=>{ const t = (chatInput.value||'').trim(); if(!t) return; sendChatMessage(t); chatInput.value = ''; });
     chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage.click(); }});
 
-    // open/close drawer
-    chatToggle.addEventListener('click', ()=>{
-      const open = chatDrawer.classList.toggle('open');
-      chatDrawer.setAttribute('aria-hidden', !open);
-      chatToggle.setAttribute('aria-expanded', open);
-      if(open){
-        // load chat history
-        loadChatHistory();
-      }
-    });
+    chatToggle.addEventListener('click', ()=>{ const open = chatDrawer.classList.toggle('open'); chatDrawer.setAttribute('aria-hidden', !open); chatToggle.setAttribute('aria-expanded', open); if(open){ loadChatHistory(); }});
+    function loadChatHistory(){ try{ const history = JSON.parse(localStorage.getItem('gg-chat-history')||'[]'); chatBody.innerHTML = ''; for(const m of history) appendMessageToUI(m, m.name === username); }catch(e){} chatBody.scrollTop = chatBody.scrollHeight; }
 
-    function loadChatHistory(){
-      try{
-        const history = JSON.parse(localStorage.getItem('gg-chat-history')||'[]');
-        chatBody.innerHTML = '';
-        for(const m of history) appendMessageToUI(m, m.name === username);
-      }catch(e){}
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    // small helper to escape text into attributes/HTML
-    function escapeHtml(s){
-      if(!s && s!==0) return '';
-      return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];});
-    }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
 
     // initialize app
     loadLayout();
 
-    // Optional: Expose a small API to add games from console for testing
-    window.GG = {
-      reloadLayout: loadLayout,
-      addGame: (g)=>{ layout.unshift(g); loadLayout(); }
-    };
+    // console API
+    window.GG = { reloadLayout: loadLayout, addGame: (g)=>{ layout.unshift(g); loadLayout(); } };
   </script>
 </body>
 </html>
