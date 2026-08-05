@@ -14,7 +14,7 @@
     "category": "Puzzle"
   },
   {
-    "id": "space-invader-clone",
+    "id": "space-invasion",
     "title": "Space Invasion",
     "thumbnail": "thumbs/space-invasion.svg",
     "src": "games/space-invasion.html",
@@ -28,17 +28,52 @@
     "category": "Adventure"
   },
   {
-    "id": "slide-3",
-    "title": "Slide 3",
-    "thumbnail": "thumbs/slide-3.svg",
-    "src": "games/slide-3.html",
-    "category": "Puzzle"
-  },
-  {
     "id": "racer-mini",
     "title": "Racer Mini",
     "thumbnail": "thumbs/racer-mini.svg",
     "src": "games/racer-mini.html",
     "category": "Racing"
+  },
+  {
+    "id": "empire-builder",
+    "title": "Empire Builder",
+    "thumbnail": "thumbs/empire-builder.svg",
+    "src": "games/empire-builder.html",
+    "category": "Strategy"
+  },
+  {
+    "id": "street-soccer",
+    "title": "Street Soccer",
+    "thumbnail": "thumbs/street-soccer.svg",
+    "src": "games/street-soccer.html",
+    "category": "Sports"
+  },
+  {
+    "id": "retro-arcade",
+    "title": "Retro Arcade",
+    "thumbnail": "thumbs/retro-arcade.svg",
+    "src": "games/retro-arcade.html",
+    "category": "Arcade"
+  },
+  {
+    "id": "farm-sim",
+    "title": "Farm Sim",
+    "thumbnail": "thumbs/farm-sim.svg",
+    "src": "games/farm-sim.html",
+    "category": "Simulation"
+  },
+  {
+    "id": "battle-rooms",
+    "title": "Battle Rooms",
+    "thumbnail": "thumbs/battle-rooms.svg",
+    "src": "games/battle-rooms.html",
+    "category": "Multiplayer"
+  },
+  {
+    "id": "reflex-run",
+    "title": "Reflex Run",
+    "thumbnail": "thumbs/reflex-run.svg",
+    "src": "games/reflex-run.html",
+    "category": "Skill"
   }
 ]
