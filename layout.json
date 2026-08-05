@@ -7,32 +7,32 @@
     "category": "Action"
   },
   {
-    "id": "block-puzzle",
-    "title": "Block Puzzle",
-    "thumbnail": "thumbs/block-puzzle.svg",
-    "src": "games/block-puzzle.html",
-    "category": "Puzzle"
+    "id": "FPS-Strike",
+    "title": "FPS Strike",
+    "thumbnail": "thumbnails/FPS-strike.png",
+    "src": "GAMES/FPS Strike.html",
+    "category": "Multiplayer"
   },
   {
-    "id": "space-invasion",
-    "title": "Space Invasion",
-    "thumbnail": "thumbs/space-invasion.svg",
-    "src": "games/space-invasion.html",
-    "category": "Classic"
-  },
-  {
-    "id": "maze-runner",
-    "title": "Maze Runner",
-    "thumbnail": "thumbs/maze-runner.svg",
-    "src": "games/maze-runner.html",
+    "id": "GTA 5",
+    "title": "GTA 5",
+    "thumbnail": "thumbnails/GTA 5.jpeg",
+    "src": "GAMES/GTA 5.html",
     "category": "Adventure"
   },
   {
-    "id": "racer-mini",
-    "title": "Racer Mini",
-    "thumbnail": "thumbs/racer-mini.svg",
-    "src": "games/racer-mini.html",
-    "category": "Racing"
+    "id": "GTA SA",
+    "title": "GTA san Andreas",
+    "thumbnail": "thumbnails/GTA SA.jpeg",
+    "src": "GAMES/GTA SA.html",
+    "category": "Adventure"
+  },
+  {
+    "id": "War strike",
+    "title": "War Strike",
+    "thumbnail": "thumbnails/Warstrike.jpg",
+    "src": "GAMES/warstrike.html",
+    "category": "Action"
   },
   {
     "id": "empire-builder",
