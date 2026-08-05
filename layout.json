@@ -1,9 +1,9 @@
 [
   {
-    "id": "hyper-jump",
-    "title": "Hyper Jump",
-    "thumbnail": "thumbs/hyper-jump.svg",
-    "src": "games/hyper-jump.html",
+    "id": "cyberpunk 2077",
+    "title": "cyberpunk 2077",
+    "thumbnail": "thumbnails/cyberpunk.jpeg",
+    "src": "GAMES/cyberpunk.html",
     "category": "Action"
   },
   {
