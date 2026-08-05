@@ -35,45 +35,45 @@
     "category": "Action"
   },
   {
-    "id": "empire-builder",
-    "title": "Empire Builder",
-    "thumbnail": "thumbs/empire-builder.svg",
-    "src": "games/empire-builder.html",
-    "category": "Strategy"
+    "id": "Red dead ",
+    "title": "Reed dead redemption",
+    "thumbnail": "thumbnails/RDR.jpg",
+    "src": "GAMES/RDR.html",
+    "category": "Adventure"
   },
   {
-    "id": "street-soccer",
-    "title": "Street Soccer",
-    "thumbnail": "thumbs/street-soccer.svg",
-    "src": "games/street-soccer.html",
-    "category": "Sports"
-  },
-  {
-    "id": "retro-arcade",
-    "title": "Retro Arcade",
-    "thumbnail": "thumbs/retro-arcade.svg",
-    "src": "games/retro-arcade.html",
-    "category": "Arcade"
-  },
-  {
-    "id": "farm-sim",
-    "title": "Farm Sim",
-    "thumbnail": "thumbs/farm-sim.svg",
-    "src": "games/farm-sim.html",
-    "category": "Simulation"
-  },
-  {
-    "id": "battle-rooms",
-    "title": "Battle Rooms",
-    "thumbnail": "thumbs/battle-rooms.svg",
-    "src": "games/battle-rooms.html",
+    "id": "Counter strike 2",
+    "title": "Counter strike 2",
+    "thumbnail": "thumbnails/cs2.jpeg",
+    "src": "GAMES/cs2.html",
     "category": "Multiplayer"
   },
   {
-    "id": "reflex-run",
-    "title": "Reflex Run",
-    "thumbnail": "thumbs/reflex-run.svg",
-    "src": "games/reflex-run.html",
-    "category": "Skill"
+    "id": "poppy playtime 1",
+    "title": "poppy playtime c1",
+    "thumbnail": "thumbnails/poppy1.jpeg",
+    "src": "GAMES/poppy1.html",
+    "category": "Strategy"
+  },
+  {
+    "id": "poppy playtime 2",
+    "title": "poppy playtime c2",
+    "thumbnail": "thumbnails/poppy2.jpeg",
+    "src": "GAMES/poppy2.html",
+    "category": "Strategy"
+  },
+  {
+    "id": "poppy playtime 3",
+    "title": "poppy playtime c3",
+    "thumbnail": "thumbnails/poppy3.png",
+    "src": "GAMES/poppy3.html",
+    "category": "Strategy"
+  },
+  {
+    "id": "poppy playtime 4",
+    "title": "poppy playtime c4",
+    "thumbnail": "thumbnails/poppy4.jpeg",
+    "src": "GAMES/poppy4.html",
+    "category": "Strategy"
   }
 ]
