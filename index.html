@@ -3,59 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GG networks</title>
+  <title>GG networks — Unblocked Games</title>
+  <link rel="icon" href="favicon.ico" />
 
   <style>
-    /* Theme: black & white, space background, netflix-style layout */
+    /* Space theme: black & white, animated starfield, netflix-style layout */
     :root{
       --bg:#000;
       --fg:#fff;
-      --muted: #cfcfcf;
-      --card-bg: #0a0a0a;
-      --accent: #fff;
-      --glass: rgba(255,255,255,0.03);
-      --shadow: 0 6px 20px rgba(255,255,255,0.03);
-      --chat-width: 25vw; /* 1/4 of screen */
+      --muted:#cfcfcf;
+      --card-bg:#0a0a0a;
+      --accent:#fff;
+      --glass:rgba(255,255,255,0.03);
+      --shadow:0 6px 20px rgba(255,255,255,0.03);
     }
 
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    /* starfield */
+
+    /* animated starfield */
     body{
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.02) 0px, transparent 40%),
-        radial-gradient(ellipse at 0% 100%, rgba(255,255,255,0.01) 0px, transparent 30%),
-        #000;
-      background-color:var(--bg);
+      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.02) 0%, transparent 40%), #000;
+      overflow-y:auto;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      padding-bottom:60px;
     }
-
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 24px;
-      position:sticky;
-      top:0;
-      backdrop-filter: blur(6px);
-      z-index:40;
-      background:linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35));
-      border-bottom: 1px solid rgba(255,255,255,0.03);
+    .stars, .stars:after{
+      position:fixed;inset:0;z-index:0;pointer-events:none;background-repeat:repeat;opacity:0.6;
     }
+    .stars{
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 2px 2px;
+      animation: move-stars 160s linear infinite;
+      opacity:0.06;
+    }
+    .stars:after{
+      content:"";background-image: radial-gradient(#fff 1px, transparent 1px);background-size:3px 3px;opacity:0.03;transform:translateZ(0);
+    }
+    @keyframes move-stars{from{background-position:0 0}to{background-position:10000px 5000px}}
 
-    .header-left{display:flex;align-items:center;gap:12px;}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo-placeholder{width:40px;height:40px;border-radius:6px;background:linear-gradient(#111,#000);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--fg);font-size:14px}
-    .site-name{font-weight:700;letter-spacing:0.6px;font-size:18px;color:var(--fg);}    
+    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-img{width:44px;height:44px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
+    .site-name{font-weight:800;letter-spacing:0.6px;font-size:18px}
+
     .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px}
     .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
     .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
-    .header-right{display:flex;align-items:center;gap:12px}
 
-    main{padding:22px 26px 120px 26px}
-
-    /* Row (category) */
+    main{position:relative;z-index:10;padding:24px}
     .row{margin-bottom:28px}
     .row-title{font-size:18px;margin:6px 0 12px 4px;color:var(--muted);font-weight:600}
     .row-cards{display:flex;gap:12px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
@@ -65,41 +60,27 @@
     .card-title{font-size:14px;margin-top:8px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .card-meta{font-size:12px;color:var(--muted)}
 
-    /* player modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:60;padding:30px}
-    .modal.open{display:flex}
-    .player{width:min(1100px,96%);height:min(700px,84%);background:#000;border-radius:10px;border:1px solid rgba(255,255,255,0.05);overflow:hidden;position:relative;display:flex;flex-direction:column}
-    .player iframe{flex:1;border:0;background:#000}
-    .player .player-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
-    .close-btn{background:transparent;border:0;color:var(--fg);font-size:16px;cursor:pointer}
+    /* fullscreen container */
+    .fs-container{display:none;position:fixed;inset:0;z-index:1000;background:#000}
+    .fs-container.open{display:block}
+    .fs-container iframe{width:100%;height:100%;border:0;background:#000}
 
-    /* chat drawer */
-    .chat-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--fg);padding:8px 12px;border-radius:8px;cursor:pointer}
-    .chat-drawer{position:fixed;right:16px;top:16px;height:calc(100vh - 32px);width:var(--chat-width);max-width:420px;background:linear-gradient(#050505,#0b0b0b);border:1px solid rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;z-index:70;box-shadow:0 15px 50px rgba(0,0,0,0.7);transform:translateX(30px);opacity:0;transition:all .18s ease}
-    .chat-drawer.open{transform:translateX(0);opacity:1}
-    .chat-header{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px}
-    .username-row{display:flex;gap:8px;align-items:center}
-    .username-row input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--fg);outline:none}
-    .chat-body{flex:1;padding:12px;overflow:auto;display:flex;flex-direction:column;gap:8px}
-    .msg{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px;color:var(--fg);max-width:90%;word-wrap:break-word}
-    .msg.me{background:rgba(255,255,255,0.04);align-self:flex-end}
-    .chat-footer{padding:10px;border-top:1px solid rgba(255,255,255,0.03);display:flex;gap:8px}
-    .chat-footer input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--fg);outline:none}
-    .chat-footer button{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#000;cursor:pointer;font-weight:700}
-
-    @media (max-width:720px){.search{width:92%}.logo-placeholder{width:34px;height:34px}.card{min-width:160px;height:110px}.player{width:96%;height:60%}.chat-drawer{width:100%;height:40vh;right:0;left:0;bottom:0;top:auto;border-radius:10px 10px 0 0;max-width:100%}}
+    @media (max-width:720px){.card{min-width:160px;height:110px}} 
 
     ::-webkit-scrollbar{height:10px;width:10px}
     ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.04);border-radius:100px}
+
+    /* small helper */
+    .empty-state{padding:28px;text-align:center;color:var(--muted)}
   </style>
 </head>
 <body>
+  <div class="stars" aria-hidden="true"></div>
+
   <header>
-    <div class="header-left">
-      <div class="brand">
-        <div class="logo-placeholder" aria-hidden="true">GG</div>
-        <div class="site-name">GG networks</div>
-      </div>
+    <div class="brand">
+      <img src="favicon.ico" alt="GG networks" class="logo-img" id="siteLogo" onerror="this.style.display='none'" />
+      <div class="site-name">GG networks</div>
     </div>
 
     <div class="search-wrap">
@@ -110,69 +91,27 @@
       </div>
     </div>
 
-    <div class="header-right">
-      <button id="chatToggle" class="chat-toggle" aria-expanded="false">Chat</button>
-    </div>
+    <div style="width:56px"></div>
   </header>
 
   <main>
     <div id="rowsContainer" aria-live="polite"></div>
   </main>
 
-  <!-- Player modal -->
-  <div class="modal" id="playerModal" aria-hidden="true">
-    <div class="player" role="dialog" aria-label="Game player">
-      <div class="player-header">
-        <div id="playerTitle">Playing — </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button id="openGameNewTab" class="close-btn" title="Open game in new tab">⤢</button>
-          <button id="closePlayer" class="close-btn" title="Close player">✕</button>
-        </div>
-      </div>
-      <iframe id="playerFrame" srcdoc="<html><body style='background:black;color:white;display:flex;align-items:center;justify-content:center;height:100%;'>No game loaded</body></html>"></iframe>
-    </div>
+  <!-- Fullscreen player container -->
+  <div class="fs-container" id="fsContainer" aria-hidden="true">
+    <iframe id="fsFrame" allowfullscreen></iframe>
   </div>
 
-  <!-- Chat drawer -->
-  <aside class="chat-drawer" id="chatDrawer" aria-hidden="true">
-    <div class="chat-header">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong>Community Chat</strong>
-        <small style="color:var(--muted)">Local & demo-only</small>
-      </div>
-      <div class="username-row">
-        <input id="usernameInput" placeholder="Your name (will persist)" />
-        <button id="saveUsername" class="chat-toggle">Save</button>
-      </div>
-    </div>
-    <div class="chat-body" id="chatBody" role="log" aria-live="polite"></div>
-    <div class="chat-footer">
-      <input id="chatInput" placeholder="Write a message..." />
-      <button id="sendMessage">Send</button>
-    </div>
-  </aside>
-
   <script>
-    // Simple app script
     const rowsContainer = document.getElementById('rowsContainer');
     const searchInput = document.getElementById('searchInput');
     const clearSearch = document.getElementById('clearSearch');
-    const playerModal = document.getElementById('playerModal');
-    const playerFrame = document.getElementById('playerFrame');
-    const playerTitle = document.getElementById('playerTitle');
-    const closePlayer = document.getElementById('closePlayer');
-    const openGameNewTab = document.getElementById('openGameNewTab');
-    const chatToggle = document.getElementById('chatToggle');
-    const chatDrawer = document.getElementById('chatDrawer');
-    const usernameInput = document.getElementById('usernameInput');
-    const saveUsername = document.getElementById('saveUsername');
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const sendMessage = document.getElementById('sendMessage');
+    const fsContainer = document.getElementById('fsContainer');
+    const fsFrame = document.getElementById('fsFrame');
 
-    let layout = []; // will be array of game objects
-    let grouped = {}; // category -> [game]
-    let currentGame = null;
+    let layout = [];
+    let grouped = {};
 
     async function loadLayout(){
       try{
@@ -181,8 +120,7 @@
         layout = await res.json();
         if(!Array.isArray(layout)) layout = [];
       }catch(e){
-        // Do not auto-populate fallback games. Show empty layout and instruct the user to edit layout.json.
-        console.warn('Could not load layout.json or it is invalid. Leave layout empty so you can connect your files via layout.json.');
+        console.warn('Could not load layout.json or it is invalid.', e);
         layout = [];
       }
       buildRows();
@@ -209,8 +147,8 @@
           <div class="card-meta">${escapeHtml(game.category || '')}</div>
         </div>
       `;
-      el.addEventListener('click', ()=>openPlayer(game));
-      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') openPlayer(game); });
+      el.addEventListener('click', ()=> playFullscreen(game));
+      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') playFullscreen(game); });
       return el;
     }
 
@@ -220,22 +158,19 @@
       const q = (filter||'').trim().toLowerCase();
 
       if(layout.length === 0){
-        // Show helpful empty state so you know to populate layout.json
         const empty = document.createElement('div');
-        empty.style.padding = '28px';
-        empty.style.textAlign = 'center';
-        empty.innerHTML = `<h2 style="margin:0 0 8px 0;color:var(--muted)">No games found</h2><p style="margin:0;color:var(--muted)">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>`;
+        empty.className = 'empty-state';
+        empty.innerHTML = `<h2 style="margin:0 0 8px 0;">No games found</h2><p style="margin:0">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>`;
         rowsContainer.appendChild(empty);
         return;
       }
 
-      // Preserve category order as they appear in layout
       const seen = new Set();
       const orderedCats = [];
       for(const g of layout){ if(!seen.has(g.category)){ orderedCats.push(g.category || 'Other'); seen.add(g.category); } }
 
       for(const cat of orderedCats){
-        const items = (grouped[cat]||[]).filter(g => !q || g.title.toLowerCase().includes(q) || (g.category||'').toLowerCase().includes(q));
+        const items = (grouped[cat]||[]).filter(g => !q || (g.title||'').toLowerCase().includes(q) || (g.category||'').toLowerCase().includes(q));
         if(items.length===0) continue;
         const row = document.createElement('section');
         row.className = 'row';
@@ -246,79 +181,69 @@
       }
     }
 
-    function openPlayer(game){
-      currentGame = game;
-      playerTitle.textContent = 'Playing — ' + (game.title || '');
-      // load iframe: prefer src (URL or relative HTML file) or srcdoc/code if provided
-      if(game.src && typeof game.src === 'string' && game.src.trim().length){
-        const src = game.src.trim();
-        // allow http(s), data URLs, or relative html files
-        if(src.startsWith('data:') || src.startsWith('http://') || src.startsWith('https://') || src.endsWith('.html') || src.endsWith('.htm')){
-          playerFrame.src = src;
-        }else{
-          // treat as raw HTML
-          playerFrame.srcdoc = src;
-        }
-      }else if(game.code && typeof game.code === 'string'){
-        playerFrame.srcdoc = game.code;
-      }else{
-        playerFrame.srcdoc = `<html><body style="background:black;color:white;display:flex;align-items:center;justify-content:center;height:100%;"><div style="text-align:center;padding:20px;"><h2>No game file specified</h2><p>${escapeHtml(game.title||'')}</p></div></body></html>`;
+    function playFullscreen(game){
+      // Use the src path from the JSON so we load the actual game file
+      const src = (game.src || '').trim();
+      if(!src){
+        alert('No game source specified for ' + (game.title||''));
+        return;
       }
 
-      playerModal.classList.add('open');
-      playerModal.setAttribute('aria-hidden','false');
+      // set iframe src and request fullscreen on container in direct response to click
+      fsFrame.src = src;
+      // Make container visible (for accessibility and fallback)
+      fsContainer.classList.add('open');
+      fsContainer.setAttribute('aria-hidden','false');
+
+      // Try to request fullscreen on the container element
+      const el = fsContainer;
+      const request = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+      if(request){
+        try{ request.call(el); }
+        catch(e){ console.warn('Fullscreen request failed', e); }
+      }
+
+      // Focus the iframe for keyboard input
+      setTimeout(()=>{ try{ fsFrame.contentWindow && fsFrame.contentWindow.focus(); }catch(e){} }, 500);
     }
 
-    closePlayer.addEventListener('click', ()=>{ closePlayerModal(); });
-    playerModal.addEventListener('click',(e)=>{ if(e.target===playerModal) closePlayerModal(); });
-    function closePlayerModal(){
-      playerModal.classList.remove('open');
-      playerModal.setAttribute('aria-hidden','true');
-      playerFrame.src = 'about:blank';
-      playerFrame.srcdoc = `<html><body style='background:black;color:white;display:flex;align-items:center;justify-content:center;height:100%;'>No game loaded</body></html>`;
-      currentGame = null;
+    // When fullscreen is exited, clear iframe and hide container
+    function onFullScreenChange(){
+      const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+      if(!fsEl){
+        // exited fullscreen
+        fsFrame.src = 'about:blank';
+        fsContainer.classList.remove('open');
+        fsContainer.setAttribute('aria-hidden','true');
+      }
     }
+    document.addEventListener('fullscreenchange', onFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+    document.addEventListener('mozfullscreenchange', onFullScreenChange);
 
-    openGameNewTab.addEventListener('click', ()=>{
-      if(!currentGame) return;
-      const src = currentGame.src || '';
-      if(!src) return;
-      if(src.startsWith('http://') || src.startsWith('https://')) window.open(src,'_blank');
-      else { const url = new URL(src, location.href).href; window.open(url,'_blank'); }
+    // allow ESC key fallback: if user presses ESC and we're not fullscreen, ensure cleanup
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        if(!fsEl){
+          // hide container
+          fsFrame.src = 'about:blank';
+          fsContainer.classList.remove('open');
+          fsContainer.setAttribute('aria-hidden','true');
+        }
+      }
     });
 
-    // Search behavior
+    // Search & clear
     searchInput.addEventListener('input', ()=>{ buildRows(searchInput.value); });
     clearSearch.addEventListener('click', ()=>{ searchInput.value=''; buildRows(''); });
 
-    /* ---------- Chat: simple BroadcastChannel + localStorage fallback ---------- */
-    const CHANNEL = 'gg-networks-chat';
-    let bc = null;
-    let username = localStorage.getItem('gg_username') || ('Guest' + Math.floor(Math.random()*9000));
-    usernameInput.value = username;
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"]+/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];}); }
 
-    try{ bc = new BroadcastChannel(CHANNEL); bc.onmessage = (ev)=>{ if(ev && ev.data) receiveIncomingMessage(ev.data); }; }
-    catch(e){ window.addEventListener('storage', (ev)=>{ if(ev.key === 'gg-chat-message' && ev.newValue){ try{ const data = JSON.parse(ev.newValue); receiveIncomingMessage(data); }catch(e){} } }); }
-
-    function persistMessageToStorage(msg){ try{ localStorage.setItem('gg-chat-last', JSON.stringify(msg)); localStorage.setItem('gg-chat-message', JSON.stringify(msg)); const history = JSON.parse(localStorage.getItem('gg-chat-history') || '[]'); history.push(msg); localStorage.setItem('gg-chat-history', JSON.stringify(history.slice(-200))); }catch(e){} }
-    function receiveIncomingMessage(msg){ appendMessageToUI(msg, false); persistMessageToStorage(msg); }
-    function appendMessageToUI(msg, localSend){ const el = document.createElement('div'); el.className = 'msg' + (localSend ? ' me' : ''); el.innerHTML = `<div style="font-weight:700;font-size:12px;margin-bottom:6px;color:var(--muted)">${escapeHtml(msg.name||'')}</div><div>${escapeHtml(msg.text||'')}</div><div style="font-size:11px;margin-top:6px;color:var(--muted)">${new Date(msg.ts).toLocaleTimeString()}</div>`; chatBody.appendChild(el); chatBody.scrollTop = chatBody.scrollHeight; }
-    function sendChatMessage(text){ const msg = {name: username, text: text, ts: Date.now(), id: 'm_'+Math.random().toString(36).slice(2,9)}; appendMessageToUI(msg, true); persistMessageToStorage(msg); if(bc) try{ bc.postMessage(msg); }catch(e){} else localStorage.setItem('gg-chat-message', JSON.stringify(msg)); }
-
-    saveUsername.addEventListener('click', ()=>{ username = (usernameInput.value||'').trim() || username; localStorage.setItem('gg_username', username); usernameInput.value = username; saveUsername.textContent = 'Saved'; setTimeout(()=> saveUsername.textContent = 'Save', 1200); });
-    sendMessage.addEventListener('click', ()=>{ const t = (chatInput.value||'').trim(); if(!t) return; sendChatMessage(t); chatInput.value = ''; });
-    chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage.click(); }});
-
-    chatToggle.addEventListener('click', ()=>{ const open = chatDrawer.classList.toggle('open'); chatDrawer.setAttribute('aria-hidden', !open); chatToggle.setAttribute('aria-expanded', open); if(open){ loadChatHistory(); }});
-    function loadChatHistory(){ try{ const history = JSON.parse(localStorage.getItem('gg-chat-history')||'[]'); chatBody.innerHTML = ''; for(const m of history) appendMessageToUI(m, m.name === username); }catch(e){} chatBody.scrollTop = chatBody.scrollHeight; }
-
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
-
-    // initialize app
     loadLayout();
 
-    // console API
-    window.GG = { reloadLayout: loadLayout, addGame: (g)=>{ layout.unshift(g); loadLayout(); } };
+    // Expose small API for debugging
+    window.GG = { reloadLayout: loadLayout };
   </script>
 </body>
 </html>
