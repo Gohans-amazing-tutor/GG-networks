@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GG networks — Unblocked Games</title>
   <link rel="icon" href="favicon.ico" />
+  <meta name="theme-color" content="#000000" />
 
   <style>
     /* Space theme: black & white, animated starfield, netflix-style layout */
@@ -15,7 +16,7 @@
       --card-bg:#0a0a0a;
       --accent:#fff;
       --glass:rgba(255,255,255,0.03);
-      --shadow:0 6px 20px rgba(255,255,255,0.03);
+      --shadow:0 8px 40px rgba(0,0,0,0.6);
     }
 
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
@@ -43,34 +44,37 @@
 
     header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));border-bottom:1px solid rgba(255,255,255,0.03)}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{width:44px;height:44px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
+    .logo-img{width:48px;height:48px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
     .site-name{font-weight:800;letter-spacing:0.6px;font-size:18px}
 
     .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px}
     .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
     .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
 
-    main{position:relative;z-index:10;padding:24px}
-    .row{margin-bottom:28px}
-    .row-title{font-size:18px;margin:6px 0 12px 4px;color:var(--muted);font-weight:600}
-    .row-cards{display:flex;gap:12px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
-    .card{min-width:220px;height:125px;background:linear-gradient(#0b0b0b,#070707);border-radius:8px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);cursor:pointer;flex:0 0 auto}
-    .card:hover{transform:translateY(-6px);transition:transform .16s ease}
-    .card-thumb{background:#000;border-radius:6px;height:70px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02)}
-    .card-title{font-size:14px;margin-top:8px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .card-meta{font-size:12px;color:var(--muted)}
+    main{position:relative;z-index:10;padding:28px}
+    .row{margin-bottom:32px}
+    .row-title{font-size:20px;margin:8px 0 14px 4px;color:var(--muted);font-weight:700}
+    .row-cards{display:flex;gap:18px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
+
+    /* Bigger Netflix-style poster cards */
+    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04);cursor:pointer;flex:0 0 auto;transition:transform .18s ease}
+    .card:hover{transform:translateY(-12px) scale(1.04)}
+    .card-thumb{background:#000;border-radius:10px;height:170px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 50px rgba(0,0,0,0.7)}
+    .card-title{font-size:18px;margin-top:12px;font-weight:800;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .card-meta{font-size:14px;color:var(--muted)}
 
     /* fullscreen container */
     .fs-container{display:none;position:fixed;inset:0;z-index:1000;background:#000}
     .fs-container.open{display:block}
     .fs-container iframe{width:100%;height:100%;border:0;background:#000}
 
-    @media (max-width:720px){.card{min-width:160px;height:110px}} 
+    @media (max-width:1200px){ .card{min-width:340px;height:220px} .card-thumb{height:140px} }
+    @media (max-width:900px){ .card{min-width:300px;height:200px} .card-thumb{height:120px} }
+    @media (max-width:720px){.card{min-width:220px;height:160px}.card-thumb{height:100px}} 
 
     ::-webkit-scrollbar{height:10px;width:10px}
     ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.04);border-radius:100px}
 
-    /* small helper */
     .empty-state{padding:28px;text-align:center;color:var(--muted)}
   </style>
 </head>
@@ -182,20 +186,16 @@
     }
 
     function playFullscreen(game){
-      // Use the src path from the JSON so we load the actual game file
       const src = (game.src || '').trim();
       if(!src){
         alert('No game source specified for ' + (game.title||''));
         return;
       }
 
-      // set iframe src and request fullscreen on container in direct response to click
       fsFrame.src = src;
-      // Make container visible (for accessibility and fallback)
       fsContainer.classList.add('open');
       fsContainer.setAttribute('aria-hidden','false');
 
-      // Try to request fullscreen on the container element
       const el = fsContainer;
       const request = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
       if(request){
@@ -203,15 +203,12 @@
         catch(e){ console.warn('Fullscreen request failed', e); }
       }
 
-      // Focus the iframe for keyboard input
       setTimeout(()=>{ try{ fsFrame.contentWindow && fsFrame.contentWindow.focus(); }catch(e){} }, 500);
     }
 
-    // When fullscreen is exited, clear iframe and hide container
     function onFullScreenChange(){
       const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
       if(!fsEl){
-        // exited fullscreen
         fsFrame.src = 'about:blank';
         fsContainer.classList.remove('open');
         fsContainer.setAttribute('aria-hidden','true');
@@ -221,12 +218,10 @@
     document.addEventListener('webkitfullscreenchange', onFullScreenChange);
     document.addEventListener('mozfullscreenchange', onFullScreenChange);
 
-    // allow ESC key fallback: if user presses ESC and we're not fullscreen, ensure cleanup
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){
         const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
         if(!fsEl){
-          // hide container
           fsFrame.src = 'about:blank';
           fsContainer.classList.remove('open');
           fsContainer.setAttribute('aria-hidden','true');
@@ -234,15 +229,13 @@
       }
     });
 
-    // Search & clear
     searchInput.addEventListener('input', ()=>{ buildRows(searchInput.value); });
     clearSearch.addEventListener('click', ()=>{ searchInput.value=''; buildRows(''); });
 
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"]+/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];}); }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
 
     loadLayout();
 
-    // Expose small API for debugging
     window.GG = { reloadLayout: loadLayout };
   </script>
 </body>
