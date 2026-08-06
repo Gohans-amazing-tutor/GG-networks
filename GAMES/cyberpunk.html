@@ -1,1 +1,64 @@
-https://solitary-cell-b88d.cine-softwares.workers.dev/autosignup/autoplay?URL=https%3A%2F%2Fwww.raccoongame.com%2Fwap%2Fdist%2F%23%2Fplatform%2Fcloudgame%2Fgamedetail%3Fgid%3D117%26name%3DCyberpunk%25202077
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberpunk 2077</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+#game{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    border:none;
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<iframe
+    id="game"
+    src="https://solitary-cell-b88d.cine-softwares.workers.dev/autosignup/autoplay?URL=https%3A%2F%2Fwww.raccoongame.com%2Fwap%2Fdist%2F%23%2Fplatform%2Fcloudgame%2Fgamedetail%3Fgid%3D117%26name%3DCyberpunk%25202077"
+    allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write"
+    allowfullscreen
+    loading="eager"
+    referrerpolicy="no-referrer">
+</iframe>
+
+<script>
+const game = document.getElementById("game");
+
+document.addEventListener("keydown", e => {
+    if (e.key === "F11") {
+        e.preventDefault();
+        if (game.requestFullscreen) {
+            game.requestFullscreen();
+        }
+    }
+});
+
+game.addEventListener("dblclick", () => {
+    if (game.requestFullscreen) {
+        game.requestFullscreen();
+    }
+});
+</script>
+
+</body>
+</html>
