@@ -1,0 +1,36 @@
+[
+  {
+    "id": "default",
+    "name": "Backgrounds - Default (Starfield)"
+  },
+  {
+    "id": "snow",
+    "name": "Backgrounds - Snow",
+    "url": "backgrounds/snow.html"
+  },
+  {
+    "id": "forest",
+    "name": "Backgrounds - Forest",
+    "url": "backgrounds/forest.jpg"
+  },
+  {
+    "id": "ocean",
+    "name": "Backgrounds - Ocean",
+    "url": "backgrounds/ocean.jpg"
+  },
+  {
+    "id": "sunset",
+    "name": "Backgrounds - Sunset",
+    "url": "backgrounds/sunset.jpg"
+  },
+  {
+    "id": "dark-blue",
+    "name": "Backgrounds - Dark Blue",
+    "color": "#0a1628"
+  },
+  {
+    "id": "dark-purple",
+    "name": "Backgrounds - Dark Purple",
+    "color": "#1a0a2e"
+  }
+]
