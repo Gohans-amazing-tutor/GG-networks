@@ -77,14 +77,30 @@
     }
     @keyframes move-stars{from{background-position:0 0}to{background-position:10000px 5000px}}
 
-    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));border-bottom:1px solid rgba(255,255,255,0.03);}
+    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));border-bottom:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(10px)}
     .brand{display:flex;align-items:center;gap:12px}
     .logo-img{width:48px;height:48px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
     .site-name{font-weight:800;letter-spacing:0.6px;font-size:18px}
 
-    .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px}
-    .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
+    .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px;gap:12px;align-items:center}
+    .search{flex:1;max-width:720px;display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
     .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
+
+    .settings-btn{background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--fg);width:44px;height:44px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:20px}
+    .settings-btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.1)}
+
+    /* Settings Modal */
+    .settings-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);align-items:center;justify-content:center}
+    .settings-modal.open{display:flex}
+    .settings-modal-content{background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;max-width:400px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
+    .settings-modal-title{font-size:20px;font-weight:800;margin:0 0 20px 0;color:var(--fg)}
+    .bg-option{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:10px;border:2px solid rgba(255,255,255,0.04);border-radius:10px;cursor:pointer;transition:all 0.2s}
+    .bg-option:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1)}
+    .bg-option.active{border-color:var(--accent);background:rgba(255,255,255,0.08)}
+    .bg-option input[type="radio"]{cursor:pointer;width:18px;height:18px}
+    .bg-option-label{flex:1;cursor:pointer;user-select:none}
+    .settings-close-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:24px;position:absolute;top:12px;right:12px;padding:8px;display:flex;align-items:center;justify-content:center}
+    .settings-close-btn:hover{color:var(--fg)}
 
     main{position:relative;z-index:10;padding:28px}
     .row{margin-bottom:32px}
@@ -92,7 +108,7 @@
     .row-cards{display:flex;gap:18px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
 
     /* Bigger Netflix-style poster cards */
-    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
+    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);cursor:pointer;transition:transform 0.3s,box-shadow 0.3s}
     .card:hover{transform:translateY(-12px) scale(1.04)}
     .card-thumb{background:#000;border-radius:10px;height:170px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 50px rgba(0,0,0,0.7)}
     .card-title{font-size:18px;margin-top:12px;font-weight:800;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -124,14 +140,24 @@
 
     <div class="search-wrap">
       <div class="search" role="search" aria-label="Search games">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="white" stroke-width="1.5" fill="none"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="10.5" r="6" stroke="white" stroke-width="1.5"/></svg>
         <input id="searchInput" placeholder="Search games, categories..." />
         <button id="clearSearch" title="Clear" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button>
       </div>
+      <button id="settingsBtn" class="settings-btn" title="Background Settings" aria-label="Open background settings">⚙️</button>
     </div>
 
     <div style="width:56px"></div>
   </header>
+
+  <!-- Settings Modal -->
+  <div class="settings-modal" id="settingsModal">
+    <div class="settings-modal-content">
+      <button class="settings-close-btn" id="closeSettingsBtn">✕</button>
+      <h2 class="settings-modal-title">Backgrounds</h2>
+      <div id="backgroundOptions"></div>
+    </div>
+  </div>
 
   <main>
     <div id="rowsContainer" aria-live="polite"></div>
@@ -148,9 +174,14 @@
     const clearSearch = document.getElementById('clearSearch');
     const fsContainer = document.getElementById('fsContainer');
     const fsFrame = document.getElementById('fsFrame');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const backgroundOptions = document.getElementById('backgroundOptions');
 
     let layout = [];
     let grouped = {};
+    let backgrounds = [];
 
     async function loadLayout(){
       try{
@@ -163,6 +194,75 @@
         layout = [];
       }
       buildRows();
+    }
+
+    async function loadBackgrounds(){
+      try{
+        const res = await fetch('backgrounds.json', {cache:'no-store'});
+        if(!res.ok) throw new Error('backgrounds.json not found');
+        backgrounds = await res.json();
+        if(!Array.isArray(backgrounds)) backgrounds = [];
+      }catch(e){
+        console.warn('Could not load backgrounds.json or it is invalid.', e);
+        backgrounds = [];
+      }
+      buildBackgroundOptions();
+    }
+
+    function buildBackgroundOptions(){
+      backgroundOptions.innerHTML = '';
+      const currentBg = localStorage.getItem('selectedBackground') || 'default';
+      
+      for(const bg of backgrounds){
+        const id = bg.id || bg.name;
+        const label = bg.name || bg.id;
+        const container = document.createElement('label');
+        container.className = 'bg-option' + (currentBg === id ? ' active' : '');
+        
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'background';
+        radio.value = id;
+        radio.checked = currentBg === id;
+        radio.addEventListener('change', ()=> applyBackground(id, bg));
+        
+        const labelText = document.createElement('div');
+        labelText.className = 'bg-option-label';
+        labelText.textContent = label;
+        
+        container.appendChild(radio);
+        container.appendChild(labelText);
+        backgroundOptions.appendChild(container);
+      }
+    }
+
+    function applyBackground(id, bgData){
+      localStorage.setItem('selectedBackground', id);
+      
+      if(bgData.url){
+        document.body.style.backgroundImage = `url('${bgData.url}')`;
+        document.body.style.backgroundAttachment = 'fixed';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+      } else if(bgData.color){
+        document.body.style.backgroundColor = bgData.color;
+        document.body.style.backgroundImage = 'none';
+      } else {
+        document.body.style.backgroundImage = 'radial-gradient(ellipse at bottom, rgba(255,255,255,0.02) 0%, transparent 40%), #000';
+        document.body.style.backgroundColor = '#000';
+      }
+      
+      buildBackgroundOptions();
+    }
+
+    function restoreBackground(){
+      const saved = localStorage.getItem('selectedBackground');
+      if(saved && backgrounds.length > 0){
+        const bg = backgrounds.find(b => (b.id || b.name) === saved);
+        if(bg){
+          applyBackground(saved, bg);
+        }
+      }
     }
 
     function groupByCategory(){
@@ -255,23 +355,33 @@
 
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){
-        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-        if(!fsEl){
-          fsFrame.src = 'about:blank';
-          fsContainer.classList.remove('open');
-          fsContainer.setAttribute('aria-hidden','true');
+        if(settingsModal.classList.contains('open')){
+          settingsModal.classList.remove('open');
+        } else {
+          const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+          if(!fsEl){
+            fsFrame.src = 'about:blank';
+            fsContainer.classList.remove('open');
+            fsContainer.setAttribute('aria-hidden','true');
+          }
         }
       }
     });
 
     searchInput.addEventListener('input', ()=>{ buildRows(searchInput.value); });
     clearSearch.addEventListener('click', ()=>{ searchInput.value=''; buildRows(''); });
+    
+    settingsBtn.addEventListener('click', ()=>{ settingsModal.classList.add('open'); });
+    closeSettingsBtn.addEventListener('click', ()=>{ settingsModal.classList.remove('open'); });
+    settingsModal.addEventListener('click', (e)=>{ if(e.target === settingsModal) settingsModal.classList.remove('open'); });
 
     function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m];}); }
 
     loadLayout();
+    loadBackgrounds();
+    restoreBackground();
 
-    window.GG = { reloadLayout: loadLayout };
+    window.GG = { reloadLayout: loadLayout, reloadBackgrounds: loadBackgrounds };
   </script>
 </body>
 </html>
