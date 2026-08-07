@@ -77,13 +77,13 @@
     }
     @keyframes move-stars{from{background-position:0 0}to{background-position:10000px 5000px}}
 
-    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));borde[...]
+    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));border-bottom:1px solid rgba(255,255,255,0.03);}
     .brand{display:flex;align-items:center;gap:12px}
     .logo-img{width:48px;height:48px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
     .site-name{font-weight:800;letter-spacing:0.6px;font-size:18px}
 
     .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px}
-    .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow[...]
+    .search{width:min(720px,70%);display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
     .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
 
     main{position:relative;z-index:10;padding:28px}
@@ -92,7 +92,7 @@
     .row-cards{display:flex;gap:18px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
 
     /* Bigger Netflix-style poster cards */
-    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(-[...]
+    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
     .card:hover{transform:translateY(-12px) scale(1.04)}
     .card-thumb{background:#000;border-radius:10px;height:170px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 50px rgba(0,0,0,0.7)}
     .card-title{font-size:18px;margin-top:12px;font-weight:800;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -124,7 +124,7 @@
 
     <div class="search-wrap">
       <div class="search" role="search" aria-label="Search games">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/[…]
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="white" stroke-width="1.5" fill="none"/></svg>
         <input id="searchInput" placeholder="Search games, categories..." />
         <button id="clearSearch" title="Clear" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button>
       </div>
@@ -199,7 +199,7 @@
       if(layout.length === 0){
         const empty = document.createElement('div');
         empty.className = 'empty-state';
-        empty.innerHTML = `<h2 style="margin:0 0 8px 0;">No games found</h2><p style="margin:0">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>[...]
+        empty.innerHTML = `<h2 style="margin:0 0 8px 0;">No games found</h2><p style="margin:0">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>`;
         rowsContainer.appendChild(empty);
         return;
       }
@@ -267,7 +267,7 @@
     searchInput.addEventListener('input', ()=>{ buildRows(searchInput.value); });
     clearSearch.addEventListener('click', ()=>{ searchInput.value=''; buildRows(''); });
 
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m];}); }
 
     loadLayout();
 
