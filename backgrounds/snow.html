@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Background — Snow</title>
+  <meta name="theme-color" content="#000000" />
+  <style>
+    /* Fullscreen canvas background for snow effect */
+    html,body{height:100%;margin:0;background:#061025;overflow:hidden}
+    .controls{position:fixed;right:12px;top:12px;z-index:20;color:#fff;font-family:Inter,system-ui,Arial;font-size:14px}
+    .controls a{color:#9fd6ff;text-decoration:none;margin-left:8px}
+    canvas{display:block}
+  </style>
+</head>
+<body>
+  <div class="controls">Snow background — <a href="/">back</a></div>
+  <canvas id="snow"></canvas>
+
+  <script>
+    // Simple, lightweight canvas snow animation
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0, height = 0, flakes = [];
+
+    function resize(){
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function createFlakes(count){
+      for(let i=0;i<count;i++){
+        flakes.push({
+          x: rand(0, width),
+          y: rand(-height, height),
+          r: rand(1.5, 4.5),
+          d: rand(0.5, 1.5),
+          sway: rand(0.5, 2.0),
+          phase: rand(0, Math.PI*2)
+        });
+      }
+    }
+
+    // initial
+    createFlakes(Math.round((window.innerWidth/100) * 8));
+
+    let last = performance.now();
+    function loop(now){
+      const dt = Math.min(40, now - last);
+      last = now;
+
+      ctx.clearRect(0,0,width,height);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.beginPath();
+
+      for(let i=0;i<flakes.length;i++){
+        const f = flakes[i];
+        // sway horizontally
+        f.phase += 0.002 * dt * f.sway;
+        f.x += Math.sin(f.phase) * 0.6 * f.sway;
+        f.y += dt * 0.03 * f.d * (1 + f.r/4);
+
+        // wrap around sides
+        if(f.x > width + 10) f.x = -10;
+        if(f.x < -10) f.x = width + 10;
+
+        // reset when below
+        if(f.y > height + 10){
+          f.y = -10;
+          f.x = rand(0, width);
+        }
+
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+      }
+
+      ctx.fill();
+
+      // gentle parallax/motion blur effect: draw translucent overlay
+      requestAnimationFrame(loop);
+    }
+
+    // start
+    requestAnimationFrame(loop);
+
+    // Expose simple API so site can integrate this background as an <iframe> or link
+    window.SnowBackground = {
+      add: (n=10)=> createFlakes(n),
+      clear: ()=> { flakes = []; }
+    };
+  </script>
+</body>
+</html>
