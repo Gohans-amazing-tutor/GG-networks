@@ -92,33 +92,33 @@
       rowsContainer.appendChild(row);
     }
 
-    // Open game in a new tab that starts as about:blank, then navigates to the game URL.
-    // Must be called directly from a user click to avoid popup blockers.
+    // NEW: open a player page on this domain and send the game URL via postMessage
+    // This keeps the address bar on your domain (player.html) so users don't see the target URL.
     function playFullscreen(game){
       const src = (game.src||'').trim();
       if(!src){ alert('No game source specified for ' + (game.title||'')); return; }
 
-      // Open a blank tab first (user-initiated). Browsers will allow this when triggered by click.
-      const w = window.open('about:blank', '_blank');
-      if(w){
-        try{
-          // Defend against opener-based attacks
-          try{ w.opener = null; }catch(e){}
-          // Navigate the new tab to the target URL
-          try{ w.location.href = src; }
-          catch(e){
-            // Some browsers throw on cross-origin assignment; retry via timeout
-            setTimeout(()=>{ try{ w.location = src; }catch(e){} }, 50);
-          }
-        }catch(e){
-          // If anything goes wrong, fallback to navigating current window
-          console.warn('Navigation to new tab failed', e);
-          window.location.href = src;
-        }
-      } else {
-        // Popup blocked — fallback to navigating the current page
-        window.location.href = src;
+      // Open player page on same origin — address bar will show your domain/player.html
+      const w = window.open('/player.html', '_blank');
+      if(!w){
+        // Popup blocked: fallback to opening a new tab directly to the target
+        window.open(src, '_blank', 'noopener');
+        return;
       }
+
+      // Send the URL to the player window via postMessage (same-origin)
+      try{
+        w.postMessage({ type: 'load-game', url: src }, location.origin);
+      }catch(e){
+        // If postMessage fails for some reason, navigate player with a query param as fallback
+        try{ w.location.href = '/player.html?u='+encodeURIComponent(btoa(src)); }catch(e2){
+          // Last resort: open the target directly
+          window.open(src, '_blank', 'noopener');
+        }
+      }
+
+      // Optionally remove opener access
+      try{ w.opener = null; }catch(e){}
     }
 
     function onFullScreenChange(){
