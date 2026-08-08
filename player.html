@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GG networks — Player</title>
+  <style>
+    html,body{height:100%;margin:0;background:#000;color:#fff}
+    #player{width:100vw;height:100vh;border:0;display:block}
+    .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#999;font-family:Inter,Arial}
+    .hide{display:none}
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">Loading…</div>
+  <iframe id="player" allow="fullscreen; autoplay; gamepad; microphone; camera" src="about:blank"></iframe>
+
+  <script>
+    const frame = document.getElementById('player');
+    const loading = document.getElementById('loading');
+
+    // Only accept same-origin messages
+    window.addEventListener('message', (ev) => {
+      try {
+        if (ev.origin !== location.origin) return;
+        const msg = ev.data || {};
+        if (msg.type === 'load-game' && typeof msg.url === 'string') {
+          loadUrl(msg.url);
+        }
+      } catch(e) { console.warn(e); }
+    }, false);
+
+    // Fallback: if opened with ?u=BASE64, decode and load
+    (function(){
+      const p = new URLSearchParams(location.search);
+      if (p.has('u')) {
+        try {
+          const decoded = atob(p.get('u'));
+          loadUrl(decoded);
+          history.replaceState(null, '', location.pathname); // clean address
+        } catch(e){ console.warn(e); }
+      }
+    })();
+
+    function loadUrl(url){
+      loading.classList.add('hide');
+      // Try to set iframe src; if blocked, navigate top as fallback
+      try {
+        frame.src = url;
+      } catch(e){
+        console.warn('Embedding failed, navigating top-level', e);
+        window.location.href = url;
+      }
+    }
+  </script>
+</body>
+</html>
