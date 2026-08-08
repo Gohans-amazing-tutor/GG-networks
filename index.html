@@ -4,195 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GG networks — Unblocked Games</title>
-  <link rel="icon" href="favicon.ico" />
-  <meta name="theme-color" content="#000000" />
-
-  <script>
-    (function(){
-      // Path to the favicon inside the assets folder
-      const assetFavicon = 'assets/favicon.ico';
-
-      // Set or update the favicon link element (with a cache-busting query to avoid stale caches)
-      function setFavicon(path){
-        let link = document.querySelector('link[rel*="icon"]');
-        if(!link){
-          link = document.createElement('link');
-          link.rel = 'icon';
-          document.head.appendChild(link);
-        }
-        // Add a short cache-buster so updates are picked up by browsers when you replace the file
-        link.href = path + '?v=' + Date.now();
-      }
-
-      // Set the header logo image (stored in #siteLogo). Wait for DOM if needed.
-      function setLogo(path){
-        function apply(){
-          const img = document.getElementById('siteLogo');
-          if(!img) return;
-          img.src = path + '?v=' + Date.now();
-        }
-        if(document.readyState === 'loading'){
-          document.addEventListener('DOMContentLoaded', apply);
-        } else apply();
-      }
-
-      // Apply both
-      setFavicon(assetFavicon);
-      setLogo(assetFavicon);
-    })();
-  </script>
-
   <style>
-    /* Space theme: black & white, animated starfield, netflix-style layout */
-    :root{
-      --bg:#000;
-      --fg:#fff;
-      --muted:#cfcfcf;
-      --card-bg:#0a0a0a;
-      --accent:#fff;
-      --glass:rgba(255,255,255,0.03);
-      --shadow:0 8px 40px rgba(0,0,0,0.6);
-    }
-
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-
-    /* animated starfield */
-    body{
-      overflow-y:auto;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-    
-    /* Backdrop for backgrounds (behind stars by default, or visible when background changes) */
-    .bg-backdrop{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      background: #000;
-      pointer-events:none;
-    }
-    
-    .stars, .stars:after{
-      position:fixed;inset:0;z-index:0;pointer-events:none;background-repeat:repeat;opacity:0.6;
-    }
-    .stars{
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      background-size: 2px 2px;
-      animation: move-stars 160s linear infinite;
-      opacity:0.06;
-    }
-    .stars:after{
-      content:"";background-image: radial-gradient(#fff 1px, transparent 1px);background-size:3px 3px;opacity:0.03;transform:translateZ(0);
-    }
-    @keyframes move-stars{from{background-position:0 0}to{background-position:10000px 5000px}}
-
-    header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));borde[...]
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo-img{width:48px;height:48px;border-radius:6px;background:#111;display:block;object-fit:contain;border:1px solid rgba(255,255,255,0.04)}
-    .site-name{font-weight:800;letter-spacing:0.6px;font-size:18px}
-
-    .search-wrap{flex:1;display:flex;justify-content:center;padding:0 20px;gap:12px;align-items:center}
-    .search{flex:1;max-width:720px;display:flex;align-items:center;gap:8px;background:var(--glass);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shad[...]
-    .search input{flex:1;background:transparent;border:0;color:var(--fg);outline:none;font-size:15px;padding:6px}
-
-    .settings-btn{background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--fg);width:44px;height:44px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-c[...]
-    .settings-btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.1)}
-
-    /* Settings Modal */
-    .settings-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);align-items:center;justify-content:center}
-    .settings-modal.open{display:flex}
-    .settings-modal-content{background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;max-width:400px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 6[...]
-    .settings-modal-title{font-size:20px;font-weight:800;margin:0 0 20px 0;color:var(--fg)}
-    .bg-option{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:10px;border:2px solid rgba(255,255,255,0.04);border-radius:10px;cursor:pointer;transition:all 0.2s}
-    .bg-option:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1)}
-    .bg-option.active{border-color:var(--accent);background:rgba(255,255,255,0.08)}
-    .bg-option input[type="radio"]{cursor:pointer;width:18px;height:18px}
-    .bg-option-label{flex:1;cursor:pointer;user-select:none}
-    .settings-close-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:24px;position:absolute;top:12px;right:12px;padding:8px;display:flex;align-items:center;justify-[...]
-    .settings-close-btn:hover{color:var(--fg)}
-
-    main{position:relative;z-index:10;padding:28px}
-    .row{margin-bottom:32px}
-    .row-title{font-size:20px;margin:8px 0 14px 4px;color:var(--muted);font-weight:700}
-    .row-cards{display:flex;gap:18px;overflow:auto;padding:6px 6px 12px 6px;scroll-behavior:smooth}
-
-    /* Bigger Netflix-style poster cards */
-    .card{min-width:420px;height:260px;background:linear-gradient(#0b0b0b,#070707);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var([...]
-    .card:hover{transform:translateY(-12px) scale(1.04)}
-    .card-thumb{background:#000;border-radius:10px;height:170px;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 50px rgba(0,0,0,0.7)}
-    .card-title{font-size:18px;margin-top:12px;font-weight:800;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .card-meta{font-size:14px;color:var(--muted)}
-
-    /* fullscreen container */
+    :root { --bg:#000; --fg:#fff; --muted:#cfcfcf; --card-bg:#0a0a0a; }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Arial}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.6)}
+    .site-name{font-weight:700}
+    main{padding:20px}
+    .rows{display:flex;flex-direction:column;gap:24px}
+    .row-cards{display:flex;gap:12px;overflow:auto;padding:6px}
+    .card{min-width:220px;background:var(--card-bg);border-radius:8px;padding:10px;cursor:pointer}
+    .card-thumb{height:120px;background:#111;border-radius:6px;background-size:cover;background-position:center}
     .fs-container{display:none;position:fixed;inset:0;z-index:1000;background:#000}
     .fs-container.open{display:block}
-    .fs-container iframe{width:100%;height:100%;border:0;background:#000}
-
-    @media (max-width:1200px){ .card{min-width:340px;height:220px} .card-thumb{height:140px} }
-    @media (max-width:900px){ .card{min-width:300px;height:200px} .card-thumb{height:120px} }
-    @media (max-width:720px){.card{min-width:220px;height:160px}.card-thumb{height:100px}} 
-
-    ::-webkit-scrollbar{height:10px;width:10px}
-    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.04);border-radius:100px}
-
-    .empty-state{padding:28px;text-align:center;color:var(--muted)}
+    .fs-container iframe{width:100%;height:100%;border:0}
+    .empty-state{color:var(--muted);padding:20px}
+    .live-link{color:#9fd6ff;text-decoration:none;border:1px solid rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px}
   </style>
 </head>
 <body>
-  <div class="bg-backdrop" id="bgBackdrop" aria-hidden="true"></div>
-  <div class="stars" aria-hidden="true"></div>
-
   <header>
-    <div class="brand">
-      <img src="favicon.ico" alt="GG networks" class="logo-img" id="siteLogo" onerror="this.style.display='none'" />
-      <div class="site-name">GG networks</div>
+    <div class="site-name">GG networks</div>
+    <div>
+      <a class="live-link" href="https://gohans-amazing-tutor.github.io/GG-networks/" target="_blank" rel="noopener">View live (Pages)</a>
     </div>
-
-    <div class="search-wrap">
-      <div class="search" role="search" aria-label="Search games">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stro[...]
-        <input id="searchInput" placeholder="Search games, categories..." />
-        <button id="clearSearch" title="Clear" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button>
-      </div>
-      <button id="settingsBtn" class="settings-btn" title="Background Settings" aria-label="Open background settings">⚙️</button>
-    </div>
-
-    <div style="width:56px"></div>
   </header>
 
-  <!-- Settings Modal -->
-  <div class="settings-modal" id="settingsModal">
-    <div class="settings-modal-content">
-      <button class="settings-close-btn" id="closeSettingsBtn">✕</button>
-      <h2 class="settings-modal-title">Backgrounds</h2>
-      <div id="backgroundOptions"></div>
-    </div>
-  </div>
-
   <main>
-    <div id="rowsContainer" aria-live="polite"></div>
+    <div id="rowsContainer" class="rows"></div>
   </main>
 
-  <!-- Fullscreen player container -->
   <div class="fs-container" id="fsContainer" aria-hidden="true">
     <iframe id="fsFrame" allowfullscreen></iframe>
   </div>
 
   <script>
     const rowsContainer = document.getElementById('rowsContainer');
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
     const fsContainer = document.getElementById('fsContainer');
     const fsFrame = document.getElementById('fsFrame');
-    const settingsBtn = document.getElementById('settingsBtn');
-    const settingsModal = document.getElementById('settingsModal');
-    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
-    const backgroundOptions = document.getElementById('backgroundOptions');
-    const bgBackdrop = document.getElementById('bgBackdrop');
-
     let layout = [];
-    let grouped = {};
-    let backgrounds = [];
 
     async function loadLayout(){
       try{
@@ -207,86 +56,7 @@
       buildRows();
     }
 
-    async function loadBackgrounds(){
-      try{
-        const res = await fetch('backgrounds.json', {cache:'no-store'});
-        if(!res.ok) throw new Error('backgrounds.json not found');
-        backgrounds = await res.json();
-        if(!Array.isArray(backgrounds)) backgrounds = [];
-      }catch(e){
-        console.warn('Could not load backgrounds.json or it is invalid.', e);
-        backgrounds = [];
-      }
-      buildBackgroundOptions();
-    }
-
-    function buildBackgroundOptions(){
-      backgroundOptions.innerHTML = '';
-      const currentBg = localStorage.getItem('selectedBackground') || 'default';
-      
-      for(const bg of backgrounds){
-        const id = bg.id || bg.name;
-        const label = bg.name || bg.id;
-        const container = document.createElement('label');
-        container.className = 'bg-option' + (currentBg === id ? ' active' : '');
-        
-        const radio = document.createElement('input');
-        radio.type = 'radio';
-        radio.name = 'background';
-        radio.value = id;
-        radio.checked = currentBg === id;
-        radio.addEventListener('change', ()=> applyBackground(id, bg));
-        
-        const labelText = document.createElement('div');
-        labelText.className = 'bg-option-label';
-        labelText.textContent = label;
-        
-        container.appendChild(radio);
-        container.appendChild(labelText);
-        backgroundOptions.appendChild(container);
-      }
-    }
-
-    function applyBackground(id, bgData){
-      localStorage.setItem('selectedBackground', id);
-      
-      // Clear default starfield effect
-      bgBackdrop.style.background = '';
-      bgBackdrop.style.backgroundImage = 'none';
-      
-      if(bgData.url){
-        bgBackdrop.style.backgroundImage = `url('${bgData.url}')`;
-        bgBackdrop.style.backgroundAttachment = 'fixed';
-        bgBackdrop.style.backgroundSize = 'cover';
-        bgBackdrop.style.backgroundPosition = 'center';
-      } else if(bgData.color){
-        bgBackdrop.style.backgroundColor = bgData.color;
-        bgBackdrop.style.backgroundImage = 'none';
-      } else {
-        bgBackdrop.style.background = 'radial-gradient(ellipse at bottom, rgba(255,255,255,0.02) 0%, transparent 40%), #000';
-      }
-      
-      buildBackgroundOptions();
-    }
-
-    function restoreBackground(){
-      const saved = localStorage.getItem('selectedBackground');
-      if(saved && backgrounds.length > 0){
-        const bg = backgrounds.find(b => (b.id || b.name) === saved);
-        if(bg){
-          applyBackground(saved, bg);
-        }
-      }
-    }
-
-    function groupByCategory(){
-      grouped = {};
-      for(const g of layout){
-        const cat = g.category || 'Other';
-        if(!grouped[cat]) grouped[cat] = [];
-        grouped[cat].push(g);
-      }
-    }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
 
     function buildCard(game){
       const el = document.createElement('div');
@@ -294,81 +64,52 @@
       el.tabIndex = 0;
       el.setAttribute('role','button');
       el.innerHTML = `
-        <div class="card-thumb" style="background-image:url('${escapeHtml(game.thumbnail || '')}');" aria-hidden="true"></div>
-        <div>
-          <div class="card-title">${escapeHtml(game.title)}</div>
-          <div class="card-meta">${escapeHtml(game.category || '')}</div>
-        </div>
+        <div class="card-thumb" style="background-image:url('${escapeHtml(game.thumbnail||'')}')"></div>
+        <div style="margin-top:8px;font-weight:700">${escapeHtml(game.title||'Untitled')}</div>
+        <div style="color:var(--muted);font-size:13px">${escapeHtml(game.category||'')}</div>
       `;
       el.addEventListener('click', ()=> playFullscreen(game));
       el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') playFullscreen(game); });
       return el;
     }
 
-    function buildRows(filter=''){
-      groupByCategory();
+    function buildRows(){
       rowsContainer.innerHTML = '';
-      const q = (filter||'').trim().toLowerCase();
-
-      if(layout.length === 0){
+      if(!layout || layout.length===0){
         const empty = document.createElement('div');
         empty.className = 'empty-state';
-        empty.innerHTML = `<h2 style="margin:0 0 8px 0;">No games found</h2><p style="margin:0">Populate <code>layout.json</code> with your games (title, thumbnail, src, category) and reload.</p>[...]
+        empty.textContent = 'No games found — add layout.json with title, thumbnail, src, category.';
         rowsContainer.appendChild(empty);
         return;
       }
 
-      const seen = new Set();
-      const orderedCats = [];
-      for(const g of layout){ if(!seen.has(g.category)){ orderedCats.push(g.category || 'Other'); seen.add(g.category); } }
-
-      for(const cat of orderedCats){
-        const items = (grouped[cat]||[]).filter(g => !q || (g.title||'').toLowerCase().includes(q) || (g.category||'').toLowerCase().includes(q));
-        if(items.length===0) continue;
-        const row = document.createElement('section');
-        row.className = 'row';
-        row.innerHTML = `<div class="row-title">${escapeHtml(cat)}</div><div class="row-cards"></div>`;
-        const cards = row.querySelector('.row-cards');
-        for(const item of items){ cards.appendChild(buildCard(item)); }
-        rowsContainer.appendChild(row);
-      }
+      const row = document.createElement('section');
+      row.className = 'row';
+      const cards = document.createElement('div');
+      cards.className = 'row-cards';
+      for(const g of layout){ cards.appendChild(buildCard(g)); }
+      row.appendChild(cards);
+      rowsContainer.appendChild(row);
     }
 
-    // Modified: open the game link in a new tab/window instead of embedding it in an iframe
+    // Show game inside fullscreen iframe (original behavior)
     function playFullscreen(game){
-      const src = (game.src || '').trim();
-      if(!src){
-        alert('No game source specified for ' + (game.title||''));
-        return;
-      }
+      const src = (game.src||'').trim();
+      if(!src){ alert('No game source specified for ' + (game.title||'')); return; }
+      fsFrame.src = src;
+      fsContainer.classList.add('open');
+      fsContainer.setAttribute('aria-hidden','false');
 
-      // Open a blank tab first to avoid certain referrer/reflection issues, then navigate it to the target URL.
-      // This must be called directly from the click handler to avoid popup blockers.
-      const w = window.open('about:blank', '_blank');
-      if(w){
-        try{
-          // Prevent the new tab from being able to access this window via `opener`
-          try{ w.opener = null; }catch(e){}
-          w.location.href = src;
-        }catch(e){
-          // Some browsers may throw for cross-origin navigation; retry via a short timeout as a fallback
-          setTimeout(()=>{
-            try{ w.location = src; }catch(e){}
-          }, 50);
-        }
-      } else {
-        // Popup blocked — fallback to navigating the current page
-        window.location.href = src;
-      }
+      const el = fsContainer;
+      const request = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+      if(request){ try{ request.call(el); } catch(e){ console.warn('Fullscreen request failed', e); } }
+
+      setTimeout(()=>{ try{ fsFrame.contentWindow && fsFrame.contentWindow.focus(); }catch(e){} }, 500);
     }
 
     function onFullScreenChange(){
       const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-      if(!fsEl){
-        fsFrame.src = 'about:blank';
-        fsContainer.classList.remove('open');
-        fsContainer.setAttribute('aria-hidden','true');
-      }
+      if(!fsEl){ fsFrame.src = 'about:blank'; fsContainer.classList.remove('open'); fsContainer.setAttribute('aria-hidden','true'); }
     }
     document.addEventListener('fullscreenchange', onFullScreenChange);
     document.addEventListener('webkitfullscreenchange', onFullScreenChange);
@@ -376,33 +117,14 @@
 
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){
-        if(settingsModal.classList.contains('open')){
-          settingsModal.classList.remove('open');
-        } else {
-          const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-          if(!fsEl){
-            fsFrame.src = 'about:blank';
-            fsContainer.classList.remove('open');
-            fsContainer.setAttribute('aria-hidden','true');
-          }
-        }
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        if(!fsEl){ fsFrame.src = 'about:blank'; fsContainer.classList.remove('open'); fsContainer.setAttribute('aria-hidden','true'); }
       }
     });
 
-    searchInput.addEventListener('input', ()=>{ buildRows(searchInput.value); });
-    clearSearch.addEventListener('click', ()=>{ searchInput.value=''; buildRows(''); });
-    
-    settingsBtn.addEventListener('click', ()=>{ settingsModal.classList.add('open'); });
-    closeSettingsBtn.addEventListener('click', ()=>{ settingsModal.classList.remove('open'); });
-    settingsModal.addEventListener('click', (e)=>{ if(e.target === settingsModal) settingsModal.classList.remove('open'); });
-
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m];}); }
-
     loadLayout();
-    loadBackgrounds();
-    restoreBackground();
 
-    window.GG = { reloadLayout: loadLayout, reloadBackgrounds: loadBackgrounds };
+    window.GG = { reloadLayout: loadLayout };
   </script>
 </body>
 </html>
