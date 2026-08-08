@@ -14,9 +14,15 @@
     .row-cards{display:flex;gap:12px;overflow:auto;padding:6px}
     .card{min-width:220px;background:var(--card-bg);border-radius:8px;padding:10px;cursor:pointer}
     .card-thumb{height:120px;background:#111;border-radius:6px;background-size:cover;background-position:center}
-    .fs-container{display:none;position:fixed;inset:0;z-index:1000;background:#000}
+
+    /* Modal / popup styles */
+    .fs-container{display:none;position:fixed;inset:0;z-index:1000}
     .fs-container.open{display:block}
-    .fs-container iframe{width:100%;height:100%;border:0}
+    .fs-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.7)}
+    .fs-inner{position:absolute;inset:5% 7%;background:#000;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.6);display:flex;flex-direction:column}
+    .fs-inner iframe{width:100%;height:100%;border:0;background:#000}
+    .fs-close{position:absolute;right:12px;top:10px;z-index:3;padding:8px 12px;border-radius:6px;border:none;background:rgba(255,255,255,0.06);color:#fff;cursor:pointer}
+
     .empty-state{color:var(--muted);padding:20px}
     .live-link{color:#9fd6ff;text-decoration:none;border:1px solid rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px}
   </style>
@@ -33,14 +39,21 @@
     <div id="rowsContainer" class="rows"></div>
   </main>
 
+  <!-- Popup container used to show the game inside an iframe -->
   <div class="fs-container" id="fsContainer" aria-hidden="true">
-    <iframe id="fsFrame" allowfullscreen></iframe>
+    <div class="fs-backdrop" id="fsBackdrop"></div>
+    <div class="fs-inner" role="dialog" aria-modal="true">
+      <button id="fsClose" class="fs-close" aria-label="Close">✕</button>
+      <iframe id="fsFrame" allowfullscreen sandbox="allow-scripts allow-forms allow-pointer-lock allow-modals"></iframe>
+    </div>
   </div>
 
   <script>
     const rowsContainer = document.getElementById('rowsContainer');
     const fsContainer = document.getElementById('fsContainer');
+    const fsBackdrop = document.getElementById('fsBackdrop');
     const fsFrame = document.getElementById('fsFrame');
+    const fsCloseBtn = document.getElementById('fsClose');
     let layout = [];
 
     async function loadLayout(){
@@ -92,66 +105,64 @@
       rowsContainer.appendChild(row);
     }
 
-    // Improved playFullscreen with multiple fallbacks to ensure the opened tab shows player.html on our domain
+    // New: open game inside modal popup iframe
     function playFullscreen(game){
       const src = (game.src||'').trim();
       if(!src){ alert('No game source specified for ' + (game.title||'')); return; }
 
-      const encoded = (()=>{ try{ return encodeURIComponent(btoa(src)); }catch(e){ return null; } })();
-
-      // 1) Preferred: open same-origin player page and postMessage the URL (keeps address bar on our domain)
+      // Show modal and set iframe src. Relative paths (like "GAMES/...") will resolve correctly.
       try{
-        const w = window.open('/player.html', '_blank');
-        if(w){
-          try{ w.postMessage({ type: 'load-game', url: src }, location.origin); }
-          catch(e){
-            // if postMessage somehow fails, navigate player with query param
-            if(encoded){ try{ w.location.href = '/player.html?u=' + encoded; }catch(_){} }
-          }
-          try{ w.opener = null; }catch(_){}
-          return;
-        }
-      }catch(e){ console.warn('window.open(/player.html) threw', e); }
-
-      // 2) Fallback: try to open an anchor to /player.html?u=... (sometimes works when window.open is blocked)
-      if(encoded){
-        try{
+        fsFrame.src = src;
+        fsContainer.classList.add('open');
+        fsContainer.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }catch(e){
+        console.warn('Failed to embed game, opening in new tab as fallback', e);
+        // Fallback: open in a new tab on our domain's player page so address stays on our site
+        const encoded = (()=>{ try{ return encodeURIComponent(btoa(src)); }catch(e){ return null; } })();
+        if(encoded){
           const a = document.createElement('a');
           a.href = '/player.html?u=' + encoded;
           a.target = '_blank';
           a.rel = 'noopener';
-          a.style.display = 'none';
           document.body.appendChild(a);
           a.click();
           a.remove();
           return;
-        }catch(e){ console.warn('anchor fallback failed', e); }
+        }
+        window.open(src, '_blank', 'noopener');
       }
-
-      // 3) Last resort: navigate current window to player.html with encoded URL so address stays on our domain
-      if(encoded){
-        window.location.href = '/player.html?u=' + encoded;
-        return;
-      }
-
-      // 4) If encoding failed, open the target directly (will show external URL)
-      window.open(src, '_blank', 'noopener');
     }
 
+    function closeFs(){
+      try{ fsFrame.src = 'about:blank'; }catch(e){}
+      fsContainer.classList.remove('open');
+      fsContainer.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    // Close handlers
+    fsCloseBtn.addEventListener('click', closeFs);
+    fsBackdrop.addEventListener('click', closeFs);
+    // click outside inner content
+    fsContainer.addEventListener('click', (e)=>{ if(e.target === fsContainer) closeFs(); });
+
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        // if not in browser fullscreen, close modal
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        if(!fsEl) closeFs();
+      }
+    });
+
+    // Keep existing fullscreenchange listener to clear iframe when leaving fullscreen
     function onFullScreenChange(){
       const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-      if(!fsEl){ fsFrame.src = 'about:blank'; fsContainer.classList.remove('open'); fsContainer.setAttribute('aria-hidden','true'); }
+      if(!fsEl){ closeFs(); }
     }
     document.addEventListener('fullscreenchange', onFullScreenChange);
     document.addEventListener('webkitfullscreenchange', onFullScreenChange);
     document.addEventListener('mozfullscreenchange', onFullScreenChange);
-
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape'){
-        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-        if(!fsEl){ fsFrame.src = 'about:blank'; fsContainer.classList.remove('open'); fsContainer.setAttribute('aria-hidden','true'); }
-      }
-    });
 
     loadLayout();
 
