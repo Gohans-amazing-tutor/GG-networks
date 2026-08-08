@@ -56,7 +56,7 @@
       buildRows();
     }
 
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m];}); }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
 
     function buildCard(game){
       const el = document.createElement('div');
@@ -92,33 +92,50 @@
       rowsContainer.appendChild(row);
     }
 
-    // NEW: open a player page on this domain and send the game URL via postMessage
-    // This keeps the address bar on your domain (player.html) so users don't see the target URL.
+    // Improved playFullscreen with multiple fallbacks to ensure the opened tab shows player.html on our domain
     function playFullscreen(game){
       const src = (game.src||'').trim();
       if(!src){ alert('No game source specified for ' + (game.title||'')); return; }
 
-      // Open player page on same origin — address bar will show your domain/player.html
-      const w = window.open('/player.html', '_blank');
-      if(!w){
-        // Popup blocked: fallback to opening a new tab directly to the target
-        window.open(src, '_blank', 'noopener');
+      const encoded = (()=>{ try{ return encodeURIComponent(btoa(src)); }catch(e){ return null; } })();
+
+      // 1) Preferred: open same-origin player page and postMessage the URL (keeps address bar on our domain)
+      try{
+        const w = window.open('/player.html', '_blank');
+        if(w){
+          try{ w.postMessage({ type: 'load-game', url: src }, location.origin); }
+          catch(e){
+            // if postMessage somehow fails, navigate player with query param
+            if(encoded){ try{ w.location.href = '/player.html?u=' + encoded; }catch(_){} }
+          }
+          try{ w.opener = null; }catch(_){}
+          return;
+        }
+      }catch(e){ console.warn('window.open(/player.html) threw', e); }
+
+      // 2) Fallback: try to open an anchor to /player.html?u=... (sometimes works when window.open is blocked)
+      if(encoded){
+        try{
+          const a = document.createElement('a');
+          a.href = '/player.html?u=' + encoded;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          return;
+        }catch(e){ console.warn('anchor fallback failed', e); }
+      }
+
+      // 3) Last resort: navigate current window to player.html with encoded URL so address stays on our domain
+      if(encoded){
+        window.location.href = '/player.html?u=' + encoded;
         return;
       }
 
-      // Send the URL to the player window via postMessage (same-origin)
-      try{
-        w.postMessage({ type: 'load-game', url: src }, location.origin);
-      }catch(e){
-        // If postMessage fails for some reason, navigate player with a query param as fallback
-        try{ w.location.href = '/player.html?u='+encodeURIComponent(btoa(src)); }catch(e2){
-          // Last resort: open the target directly
-          window.open(src, '_blank', 'noopener');
-        }
-      }
-
-      // Optionally remove opener access
-      try{ w.opener = null; }catch(e){}
+      // 4) If encoding failed, open the target directly (will show external URL)
+      window.open(src, '_blank', 'noopener');
     }
 
     function onFullScreenChange(){
