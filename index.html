@@ -56,7 +56,7 @@
       buildRows();
     }
 
-    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
+    function escapeHtml(s){ if(!s && s!==0) return ''; return (''+s).replace(/[&<>\"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m];}); }
 
     function buildCard(game){
       const el = document.createElement('div');
@@ -92,19 +92,33 @@
       rowsContainer.appendChild(row);
     }
 
-    // Show game inside fullscreen iframe (original behavior)
+    // Open game in a new tab that starts as about:blank, then navigates to the game URL.
+    // Must be called directly from a user click to avoid popup blockers.
     function playFullscreen(game){
       const src = (game.src||'').trim();
       if(!src){ alert('No game source specified for ' + (game.title||'')); return; }
-      fsFrame.src = src;
-      fsContainer.classList.add('open');
-      fsContainer.setAttribute('aria-hidden','false');
 
-      const el = fsContainer;
-      const request = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
-      if(request){ try{ request.call(el); } catch(e){ console.warn('Fullscreen request failed', e); } }
-
-      setTimeout(()=>{ try{ fsFrame.contentWindow && fsFrame.contentWindow.focus(); }catch(e){} }, 500);
+      // Open a blank tab first (user-initiated). Browsers will allow this when triggered by click.
+      const w = window.open('about:blank', '_blank');
+      if(w){
+        try{
+          // Defend against opener-based attacks
+          try{ w.opener = null; }catch(e){}
+          // Navigate the new tab to the target URL
+          try{ w.location.href = src; }
+          catch(e){
+            // Some browsers throw on cross-origin assignment; retry via timeout
+            setTimeout(()=>{ try{ w.location = src; }catch(e){} }, 50);
+          }
+        }catch(e){
+          // If anything goes wrong, fallback to navigating current window
+          console.warn('Navigation to new tab failed', e);
+          window.location.href = src;
+        }
+      } else {
+        // Popup blocked — fallback to navigating the current page
+        window.location.href = src;
+      }
     }
 
     function onFullScreenChange(){
